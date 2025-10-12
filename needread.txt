@@ -1,0 +1,5 @@
+1. dichj code - babel compiler => code nhieu version của java script.
+require 
+import const
+
+2.tối ưu code, nén nó thành 1 vài file:cs/js : weback
