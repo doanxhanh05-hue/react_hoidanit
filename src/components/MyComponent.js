@@ -8,14 +8,24 @@ class MyComponent extends React.Component {
         address: 'hoi dan it',
         age: 24,
     };
+    handleClick(event) {
+        console.log(">> click me my button");
+        console.log('myname is hanh');
 
+    }
+    handleOnMoverOver(event) {
+        console.log(event.pageX);
+    }
     // JSX
     render() {
         return (
             <div>
                 my name is{this.state.name} and i from {this.state.address}
+                <button onMouseOver={this.handleOnMoverOver}>hover me</button>
+                <button onClick={this.handleClick}>click me</button>
             </div>
             // this =>dang su dung mycomponent
+
         );
     }
 }
