@@ -1,33 +1,47 @@
 import React from 'react'
 
 class DisplayInfor extends React.Component {
+
+    state = {
+        isShowListUser: true
+    }
+    handleShowHide = () => {
+        this.setState({
+            isShowListUser: !this.state.isShowListUser
+        })
+    }
     render() {
         //const listUsers = this.props.listUsers
         // props => viết tắt properties
         //destructuring array/object
         const { listUsers } = this.props; //object
-        console.log(listUsers);
-
+        // console.log(listUsers);
+        // console.table(listUsers);
         return (
             <div>
-                {listUsers.map((user,index) => {
-                    
-                    return (
-                        <div key={user.id}>
-                            <hr />
-                            <div>my name's {user.name} </div>
-                            <div>my age's {user.age}</div>
-                        </div>
-                    )
-                })}
-                {/* <div>my name's {name}</div>
-                <div>my age's {age}</div>
-                <hr />
-                <div>my name's {name}</div>
-                <div>my age's {age}</div>
-                <hr />
-                <div>my name's {name}</div>
-                <div>my age's {age}</div> */}
+                <div>
+                    <span onClick={() => { this.handleShowHide() }}>
+                        Hide list users:
+                        {this.state.isShowListUser === true ? "hide listuser" : "show listUser"}
+                    </span>
+                </div>
+                {this.state.isShowListUser &&
+                    <div>
+                        {listUsers.map((user, index) => {
+
+                            return (
+                                <div key={user.id} className={+user.age > 18 ? "green" : "red"}>
+                                    <hr />
+                                    <div>my name's {user.name} </div>
+                                    <div>my age's {user.age}</div>
+                                </div>
+                            )
+
+
+                        })}
+
+                    </div>
+                }
             </div>
         )
 
