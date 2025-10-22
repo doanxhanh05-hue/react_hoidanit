@@ -13,9 +13,9 @@ class MyComponent extends React.Component {
         ]
     }
     handleAddNewUser = (userObj) => {
-    let listUserClone = [...this.state.listUser];
-    console.log("check: ",listUserClone);
-    
+        let listUserClone = [...this.state.listUser];
+        console.log("check: ", listUserClone);
+
         // this.setState({
         //     listUsers: [userObj,...this.state.listUser]
         // })
@@ -25,20 +25,25 @@ class MyComponent extends React.Component {
     render() {
 
         return (
-            <div>
-                <AddUserInfor 
-                    handleAddNewUser={this.handleAddNewUser}
+            <>
+                <div className='a'>
+                    <AddUserInfor
+                        handleAddNewUser={this.handleAddNewUser}
 
-                />
-                <br></br>
+                    />
+                    <br></br>
 
-                <DisplayInfor
-                    listUsers={this.state.listUsers}
-                />
+                    <DisplayInfor
+                        listUsers={this.state.listUsers}
+                    />
 
 
-            </div>
-            // this =>dang su dung mycomponent
+                </div>
+                {/* this =>dang su dung mycomponent */}
+                <div className='b'>
+
+                </div>
+            </>
 
         );
     }
