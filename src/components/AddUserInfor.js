@@ -2,9 +2,9 @@ import React from 'react';
 
 class AddUserInfor extends React.Component {
     state = {
-        name: 'Hanh xau nhat the gioi',
+        name: '',
         address: 'hoi dan it',
-        age: 24,
+        age: '',
     };
 
 
@@ -46,7 +46,7 @@ class AddUserInfor extends React.Component {
                     />
                     <button>Submit</button>
                     <lable>your age:</lable>
-                    <input type="text" value={this.state.name}
+                    <input type="text" value={this.state.age}
                         onChange={(event) => this.handleOnChangeAge(event)}
                     />
                     <button>Submit</button>
