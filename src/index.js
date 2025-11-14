@@ -14,9 +14,10 @@ root.render(
     {/* <React.StrictMode> */}
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<App />} />
-        <Route path="Users" element={<User />} />
-        <Route path="Admins" element={<Admin />} />
+        <Route path="/" element={<App />} >
+          <Route path="Users" element={<User />} />
+          <Route path="Admins" element={<Admin />} />
+        </Route>
       </Routes>
     </BrowserRouter>
 
