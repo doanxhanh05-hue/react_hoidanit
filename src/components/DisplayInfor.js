@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import './DisplayInfor.scss';
-import logo from './../logo.svg';
 
 //stateless vs stateful
 // class DisplayInfor extends React.Component {  
@@ -44,6 +43,15 @@ const DisplayInfor = (props) => {
 
         setShowHideListUser(!isShowHideListUser);
     }
+    console.log("call me render")
+    Userffect(() => {
+        if (listUsers.length === 0) {
+            console.log("deleted all the usser");
+
+        }
+        console.log("call me userffect");
+
+    }, [listUsers])
     return (
         <div className="display-infor-container">
             <div>
