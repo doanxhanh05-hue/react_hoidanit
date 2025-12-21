@@ -1,9 +1,15 @@
 import React from 'react'
-
+import VideoHomepage from '../../assest/video_homepage.mp4';
 const HomePage = (props) => {
     return (
         <div className='homepage-container'>
-            home-page component
+            <video autoPlay loop muted>
+                <source 
+                src={VideoHomepage}
+                type='video/mp4'
+                />
+            </video>
+
         </div>
     )
 }

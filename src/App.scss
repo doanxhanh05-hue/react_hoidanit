@@ -13,9 +13,14 @@ body {
     .navbar-nav {
       .nav-link {
         &.active {
-          color: blue;
+          color: #00bfff;
         }
       }
     }
   }
+}
+video{
+  position: fixed;
+  bottom: 0;
+  width: 100vw;
 }
