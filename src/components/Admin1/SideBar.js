@@ -10,6 +10,8 @@ import {
 } from 'react-pro-sidebar';
 import { FaTachometerAlt, FaGem, FaList, FaGithub, FaRegLaughWink, FaHeart } from 'react-icons/fa';
 import sidebarBg from '../../assest/bg2.jpg';
+import {DiReact} from 'react-icons/di'
+import {MdDashboard} from 'react-icons/md'
 const SideBar = (props) => {
     const { image, collapsed, toggled, handleToggleSidebar } = props;
     return (
@@ -34,7 +36,8 @@ const SideBar = (props) => {
                             whiteSpace: 'nowrap',
                         }}
                     >
-                        Hoi Dan IT
+                        <DiReact size={'3em'} color={"00bfff"}></DiReact>
+                        <span>HANH DEP TRAI</span>
                     </div>
                 </SidebarHeader>
                 <SidebarContent>
@@ -50,11 +53,12 @@ const SideBar = (props) => {
                     <Menu iconShape="circle">
                         <SubMenu
                             suffix={<span className="badge yellow">3</span>}
-                            icon={<FaRegLaughWink />}
+                            icon={<FaGem />}
+                            title="Features"
                         >
-                            <MenuItem> 1</MenuItem>
-                            <MenuItem> 2</MenuItem>
-                            <MenuItem> 3</MenuItem>
+                            <MenuItem> Quan ly User</MenuItem>
+                            <MenuItem> Quan Ly bai Quiz</MenuItem>
+                            <MenuItem> Quan ly cau hoi</MenuItem>
                         </SubMenu>
                     </Menu>
                 </SidebarContent>
