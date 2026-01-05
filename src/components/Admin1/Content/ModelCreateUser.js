@@ -3,11 +3,18 @@ import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { FcPlus } from "react-icons/fc";
-
-const ModelCreateUser = () => {
-  const [show, setShow] = useState(false);
-
-  const handleClose = () => setShow(false);
+import axios from 'axios';
+const ModelCreateUser = (props) => {
+  const { show, setShow } = props;
+  const handleClose = () => {
+    setShow("");
+    setEmail("");
+    setPassword("");
+    setUsername("");
+    setRole("ROLE");
+    setPreviewImage("")
+  }
+  ;
   const handleShow = () => setShow(true);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -23,12 +30,30 @@ const ModelCreateUser = () => {
     }
   }
   const [previewImage, setPreviewImage] = useState("");
+
+  const handleSubmitCreateUser = async() => {
+    //validate
+
+    //call apis
+    // let data={
+    //   email: email,
+    //   password: password,
+    //   username: username,
+    //   role: role,
+    //   userImage: image 
+    // }
+    // console.log(data);
+    const data = new FormData();
+    data.append('email', email);
+    data.append('password', password);
+    data.append('username', username);
+    data.append('role', role);
+    data.append('userImage', image);
+    let res = await axios.post('http://localhost:8081/api/v1/participant', data);
+    console.log(">>check res", res);
+  }
   return (
     <>
-      <Button variant="primary" onClick={handleShow}>
-        Launch demo modal
-      </Button>
-
       <Modal className='model-add-user' backdrop="static" show={show} onHide={handleClose} size='sm'>
         <Modal.Header closeButton>
           <Modal.Title>ADD new User</Modal.Title>
@@ -49,7 +74,7 @@ const ModelCreateUser = () => {
             </div>
             <div className="col-md-4">
               <label className="form-label">role</label>
-              <select id="inputState" onChange={(event) => setRole(event.target.value)} className="form-select">
+              <select id="inputState" onChange={(event) => setRole(event.target.value)} value={role} className="form-select">
                 <option value="USER">USER</option>
                 <option value="Admin">ADMIN</option>
               </select>
@@ -71,7 +96,7 @@ const ModelCreateUser = () => {
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={handleClose}>
+          <Button variant="primary" onClick={() => handleSubmitCreateUser()}>
             Save
           </Button>
         </Modal.Footer>
