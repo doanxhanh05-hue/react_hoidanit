@@ -1,6 +1,9 @@
 import { Outlet } from 'react-router-dom';
 import './App.scss';
 import Header from './components/header/Header';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 const App = () => {
 
   return (
@@ -15,6 +18,17 @@ const App = () => {
           <Outlet></Outlet>
         </div>
       </div>
+      <ToastContainer
+        position="bottom-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick={false}
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
     </div>
   );
 }
