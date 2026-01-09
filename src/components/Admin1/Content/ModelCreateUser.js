@@ -43,32 +43,34 @@ const ModelCreateUser = (props) => {
 
     //validate
     const isValidEmail = validateEmail(email);
-    if (!isValidEmail){
+    if (!isValidEmail) {
       toast.error('invalid email')
       return;
-    }if (!password){
+    } if (!password) {
       toast.error('invalid password')
       return;
     }
-      //call apis
-      // let data={
-      //   email: email,
-      //   password: password,
-      //   username: username,
-      //   role: role,
-      //   userImage: image 
-      // }
-      // console.log(data);
-      
-    let data = await postCreateUser(email, password, username, role, image) ;
+    //call apis
+    // let data={
+    //   email: email,
+    //   password: password,
+    //   username: username,
+    //   role: role,
+    //   userImage: image 
+    // }
+    // console.log(data);
+
+    let data = await postCreateUser(email, password, username, role, image);
     console.log("component res", data);
-    
-    if(data && data.EC === 0 )
+
+    if (data && data.EC === 0) {
       toast.success(data.EM);
       handleClose();
-    if(data && data.EC === 1 )
+      await props.fetchListUsers()
+    }
+    if (data && data.EC === 1){
       toast.error(data.EM);
-
+    }
   }
   return (
     <>
