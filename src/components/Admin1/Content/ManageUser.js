@@ -25,6 +25,9 @@ const ManageUser = (props) => {
     setShowModelUpdateUser(true);
     setDataUpdate(user)
   }
+  const resetUpdateData=() =>{
+    setDataUpdate({})
+  }
   const handleShowHideModal = (value) => {
     setShowModalCreateUser(value);
   }
@@ -47,7 +50,9 @@ const ManageUser = (props) => {
         <ModelUpdateUser
         show={showModelUpdateUser}
         setShow={setShowModelUpdateUser}
-        dataUpdate={dataUpdate}      
+        dataUpdate={dataUpdate}
+        fetchListUsers={fetchListUsers}     
+        resetUpdateData={resetUpdateData} 
         />
       </div>
 

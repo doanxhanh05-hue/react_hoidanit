@@ -6,7 +6,7 @@ import { FcPlus } from "react-icons/fc";
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import _ from 'lodash';
-import { postCreateUser } from '../../../services/apiService';
+import { putUpdateUser } from '../../../services/apiService';
 const ModelUpdateUser = (props) => {
     const { show, setShow, dataUpdate } = props;
     const handleClose = () => {
@@ -14,8 +14,9 @@ const ModelUpdateUser = (props) => {
         setEmail("");
         setPassword("");
         setUsername("");
-        setRole("ROLE");
-        setPreviewImage("")
+        setRole("USER");
+        setPreviewImage("");
+        props.resetUpdateData();
     }
         ;
     const handleShow = () => setShow(true);
@@ -64,9 +65,6 @@ const ModelUpdateUser = (props) => {
         if (!isValidEmail) {
             toast.error('invalid email')
             return;
-        } if (!password) {
-            toast.error('invalid password')
-            return;
         }
         //call apis
         // let data={
@@ -78,7 +76,7 @@ const ModelUpdateUser = (props) => {
         // }
         // console.log(data);
 
-        let data = await postCreateUser(email, password, username, role, image);
+        let data = await putUpdateUser(dataUpdate.id ,username, role, image);
         console.log("component res", data);
 
         if (data && data.EC === 0) {
