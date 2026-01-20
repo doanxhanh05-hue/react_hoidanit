@@ -32,15 +32,12 @@ const ModelCreateUser = (props) => {
     }
   }
   const [previewImage, setPreviewImage] = useState("");
-
   const handleSubmitCreateUser = async () => {
     const validateEmail = (email) => {
       return email.match(
         /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
       );
     };
-
-
     //validate
     const isValidEmail = validateEmail(email);
     if (!isValidEmail) {
@@ -59,7 +56,6 @@ const ModelCreateUser = (props) => {
     //   userImage: image 
     // }
     // console.log(data);
-
     let data = await postCreateUser(email, password, username, role, image);
     console.log("component res", data);
 
@@ -68,7 +64,7 @@ const ModelCreateUser = (props) => {
       handleClose();
       await props.fetchListUsers()
     }
-    if (data && data.EC === 1){
+    if (data && data.EC === 1) {
       toast.error(data.EM);
     }
   }

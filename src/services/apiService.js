@@ -10,6 +10,7 @@
       data.append('userImage', image);
       return axios.post('api/v1/participant', data);
   }
+
   const getAllUsers = () =>{
     return axios.get('api/v1/participant/all');
   }
@@ -23,4 +24,5 @@
       data.append('userImage', image);
       return axios.put('api/v1/participant', data);
   }
+
   export {postCreateUser, getAllUsers, putUpdateUser}

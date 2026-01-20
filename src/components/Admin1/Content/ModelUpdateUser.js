@@ -16,7 +16,7 @@ const ModelUpdateUser = (props) => {
         setUsername("");
         setRole("USER");
         setPreviewImage("");
-        props.resetUpdateData();
+        
     }
         ;
     const handleShow = () => setShow(true);
