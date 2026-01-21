@@ -70,7 +70,7 @@ const ModelCreateUser = (props) => {
   }
   return (
     <>
-      <Modal className='model-add-user' backdrop="static" show={show} onHide={handleClose} size='sm'>
+      <Modal className='model-add-user' backdrop="static" show={show} onHide={handleClose} size='xl'>
         <Modal.Header closeButton>
           <Modal.Title>ADD new User</Modal.Title>
         </Modal.Header>

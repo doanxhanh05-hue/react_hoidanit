@@ -6,13 +6,16 @@ import { useEffect, useState } from 'react'
 import { getAllUsers } from '../../../services/apiService';
 import ModelUpdateUser from "./ModelUpdateUser";
 import ModelViewUser from "./ModelViewUser";
+import ModalDeleteUser from "./ModalDeleteUser";
 const ManageUser = (props) => {
   const [showModalCreateUser, setShowModalCreateUser] = useState(false);
   const [showModelUpdateUser, setShowModelUpdateUser] = useState(false);
   const [showModelViewUser, setShowModelViewUser] = useState(false);
   const [ dataUpdate, setDataUpdate] = useState({});
   const [dataView, setDataView] = useState({});
+  const [dataDelete, setDataDelete] = useState({});
   const [listUsers, setListUsers] = useState([]);
+  const [showModelDeleteUser, setShowModelDeleteUser] = useState(false);
   useEffect(() => {
     fetchListUsers();
   }, []);
@@ -32,6 +35,12 @@ const ManageUser = (props) => {
     setShowModelUpdateUser(true);
     setDataUpdate(user)
   }
+  const handleClickButtonDelete=(user)=>{
+    console.log('data delete: ', user);
+    
+    setShowModelDeleteUser(true);
+  }
+  
   const resetUpdateData=() =>{
     setDataUpdate({})
   }
@@ -51,7 +60,9 @@ const ManageUser = (props) => {
           <button className="btn btn-primary" onClick={() => setShowModalCreateUser(true)}><FcPlus />ADd new User</button>
         </div>
         <div className="table-users-container">
-          <TableUser listUsers={listUsers} handleClickButtonUpdate={handleClickButtonUpdate} handleClickButtonView={handleClickButtonView}/>
+          <TableUser
+          handleClickButtonDelete={handleClickButtonDelete}
+           listUsers={listUsers} handleClickButtonUpdate={handleClickButtonUpdate} handleClickButtonView={handleClickButtonView}/>
         </div>
         <ModelCreateUser show={showModalCreateUser}
           setShow={setShowModalCreateUser}
@@ -68,9 +79,14 @@ const ManageUser = (props) => {
         show={showModelViewUser}
         setShow={setShowModelViewUser}
         resetViewData={resetViewData} 
+        dataView={dataView}
+        />
+        <ModalDeleteUser
+        show={showModelDeleteUser}
+        setShow={setShowModelDeleteUser}
+        
         />
       </div>
-
     </div>
   )
 }

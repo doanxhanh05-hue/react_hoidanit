@@ -16,7 +16,7 @@ const ModelUpdateUser = (props) => {
         setUsername("");
         setRole("USER");
         setPreviewImage("");
-        
+        props.resetUpdateData();
     }
         ;
     const handleShow = () => setShow(true);
@@ -37,8 +37,7 @@ const ModelUpdateUser = (props) => {
             setImage("");
             if(dataUpdate.image){
                 setPreviewImage(`data:image/jpeg;base64,${dataUpdate.image}`);
-            }
-            
+            }           
         }
     }, [props.dataUpdate]);
 
