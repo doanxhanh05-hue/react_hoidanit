@@ -36,8 +36,7 @@ const ManageUser = (props) => {
     setDataUpdate(user)
   }
   const handleClickButtonDelete=(user)=>{
-    console.log('data delete: ', user);
-    
+    setDataDelete(user);
     setShowModelDeleteUser(true);
   }
   
@@ -84,7 +83,8 @@ const ManageUser = (props) => {
         <ModalDeleteUser
         show={showModelDeleteUser}
         setShow={setShowModelDeleteUser}
-        
+        dataDelete={dataDelete}
+        fetchListUsers={fetchListUsers}
         />
       </div>
     </div>
