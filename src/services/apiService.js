@@ -1,4 +1,4 @@
-  import React from 'react'
+
   import axios from '../utils/axiosCustomize';
   const postCreateUser = (email, password, username, role, image) => {
       //submit data
@@ -27,5 +27,10 @@
   const deleteUser = (userId) =>{
     return axios.delete('api/v1/participant', {data: {id: userId}});
   }
+  const getUserWithPaginate = (page, limit) =>{
+    return axios.get(`api/v1/participant?page=${page}&limit=${limit}`);
+  }
 
-  export {postCreateUser, getAllUsers, putUpdateUser, deleteUser}
+  export {postCreateUser, 
+    getAllUsers, putUpdateUser, 
+    deleteUser, getUserWithPaginate}

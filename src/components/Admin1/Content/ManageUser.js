@@ -3,23 +3,25 @@ import './ManageUser.scss';
 import { FcPlus } from "react-icons/fc";
 import TableUser from "./TableUser";
 import { useEffect, useState } from 'react'
-import { getAllUsers } from '../../../services/apiService';
+import { getAllUsers , getUserWithPaginate} from '../../../services/apiService';
 import ModelUpdateUser from "./ModelUpdateUser";
 import ModelViewUser from "./ModelViewUser";
 import ModalDeleteUser from "./ModalDeleteUser";
+import TableUserPaginate from "./TableUserPaginate";
 const ManageUser = (props) => {
+  const LIMIT_USER = 6;
   const [showModalCreateUser, setShowModalCreateUser] = useState(false);
   const [showModelUpdateUser, setShowModelUpdateUser] = useState(false);
   const [showModelViewUser, setShowModelViewUser] = useState(false);
-  const [ dataUpdate, setDataUpdate] = useState({});
+  const [dataUpdate, setDataUpdate] = useState({});
   const [dataView, setDataView] = useState({});
   const [dataDelete, setDataDelete] = useState({});
   const [listUsers, setListUsers] = useState([]);
   const [showModelDeleteUser, setShowModelDeleteUser] = useState(false);
   useEffect(() => {
-    fetchListUsers();
+    fetchListUsersWithPaginate(1);
   }, []);
-  
+
 
   const fetchListUsers = async () => {
     let res = await getAllUsers()
@@ -27,23 +29,33 @@ const ManageUser = (props) => {
       setListUsers(res.DT)
     }
   }
+  const fetchListUsersWithPaginate = async (page) => {
+    let res = await getUserWithPaginate(page, LIMIT_USER)
+    if (res.EC === 0) {
+      console.log('res.dt = ', res.DT);
+      setListUsers(res.DT.users)
+      setPageCount(res.DT.totalPages)
+    }
+  }
+    const [pageCount, setPageCount] = useState(0);
+
   const handleClickButtonView = (user) => {
-  setDataView(user);
-  setShowModelViewUser(true);
-};
-  const handleClickButtonUpdate =(user)=>{
+    setDataView(user);
+    setShowModelViewUser(true);
+  };
+  const handleClickButtonUpdate = (user) => {
     setShowModelUpdateUser(true);
     setDataUpdate(user)
   }
-  const handleClickButtonDelete=(user)=>{
+  const handleClickButtonDelete = (user) => {
     setDataDelete(user);
     setShowModelDeleteUser(true);
   }
-  
-  const resetUpdateData=() =>{
+
+  const resetUpdateData = () => {
     setDataUpdate({})
   }
-  const resetViewData=() =>{
+  const resetViewData = () => {
     setDataView({})
   }
   const handleShowHideModal = (value) => {
@@ -59,32 +71,40 @@ const ManageUser = (props) => {
           <button className="btn btn-primary" onClick={() => setShowModalCreateUser(true)}><FcPlus />ADd new User</button>
         </div>
         <div className="table-users-container">
-          <TableUser
-          handleClickButtonDelete={handleClickButtonDelete}
-           listUsers={listUsers} handleClickButtonUpdate={handleClickButtonUpdate} handleClickButtonView={handleClickButtonView}/>
+          {/* <TableUser
+            handleClickButtonDelete={handleClickButtonDelete}
+            listUsers={listUsers} handleClickButtonUpdate={handleClickButtonUpdate} handleClickButtonView={handleClickButtonView}/> */}
+          <TableUserPaginate
+            handleClickButtonDelete={handleClickButtonDelete}
+            listUsers={listUsers}
+            handleClickButtonUpdate={handleClickButtonUpdate}
+            handleClickButtonView={handleClickButtonView}
+            fetchListUsersWithPaginate={fetchListUsersWithPaginate}
+            pageCount={pageCount}
+          />
         </div>
         <ModelCreateUser show={showModalCreateUser}
           setShow={setShowModalCreateUser}
           fetchListUsers={fetchListUsers}
         />
         <ModelUpdateUser
-        show={showModelUpdateUser}
-        setShow={setShowModelUpdateUser}
-        dataUpdate={dataUpdate}
-        fetchListUsers={fetchListUsers}     
-        resetUpdateData={resetUpdateData} 
+          show={showModelUpdateUser}
+          setShow={setShowModelUpdateUser}
+          dataUpdate={dataUpdate}
+          fetchListUsers={fetchListUsers}
+          resetUpdateData={resetUpdateData}
         />
         <ModelViewUser
-        show={showModelViewUser}
-        setShow={setShowModelViewUser}
-        resetViewData={resetViewData} 
-        dataView={dataView}
+          show={showModelViewUser}
+          setShow={setShowModelViewUser}
+          resetViewData={resetViewData}
+          dataView={dataView}
         />
         <ModalDeleteUser
-        show={showModelDeleteUser}
-        setShow={setShowModelDeleteUser}
-        dataDelete={dataDelete}
-        fetchListUsers={fetchListUsers}
+          show={showModelDeleteUser}
+          setShow={setShowModelDeleteUser}
+          dataDelete={dataDelete}
+          fetchListUsers={fetchListUsers}
         />
       </div>
     </div>
