@@ -5,9 +5,8 @@ const TableUserPaginate = (props) => {
   const { listUsers, pageCount } = props;
   const handlePageClick = (event) => {
     props.fetchListUsersWithPaginate(+event.selected + 1)
-    console.log(
-      `User requested page number ${event.selected}}`
-    );
+    props.setCurrentPage(+event.selected + 1)
+    console.log(`User requested page number ${event.selected}}`);
   };
   console.log('render view');
   return (
@@ -57,22 +56,25 @@ const TableUserPaginate = (props) => {
           marginPagesDisplayed={2}
           pageCount={pageCount}
           previousLabel="< previous"
+
           pageClassName="page-item"
+          pageLinkClassName="page-link"   // ⭐ thêm dòng này
           previousClassName="page-item"
           previousLinkClassName="page-link"
           nextClassName="page-item"
           nextLinkClassName="page-link"
+
           breakLabel="..."
           breakClassName="page-item"
           breakLinkClassName="page-link"
-          containerClassName="pagination"
+
+          containerClassName="pagination justify-content-center"
           activeClassName="active"
-          renderOnZeroPageCount={null}
+
+          forcePage={props.currentPage - 1}
         />
 
       </div>
-
-
     </>
   )
 }
