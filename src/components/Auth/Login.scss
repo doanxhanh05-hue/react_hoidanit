@@ -1,7 +1,9 @@
     .login-container {
+
+
         .header {
             height: 45px;
-            
+
             text-align: right;
             padding: 5px 100px 0 100px;
 
@@ -12,7 +14,9 @@
                 border-radius: 5px;
                 background-color: #f9f9f9;
                 border: 1px solid;
-                &:hover{
+
+
+                &:hover {
                     background-color: white;
                 }
             }
@@ -34,6 +38,21 @@
         }
 
         .content-form {
+            .loader-icon {
+                margin-right: 7px;
+                top: 2px;
+                animation: spin 1s infinite linear;
+            }
+
+            @keyframes spin {
+                from {
+                    transform: scale(1) rotate(0deg);
+                }
+
+                to {
+                    transform: scale(1) rotate(360deg);
+                }
+            }
 
             input {
                 margin-bottom: 15px;
@@ -48,8 +67,15 @@
                 border-radius: 5px;
                 color: white;
                 background: black;
+
+                &:disabled {
+                    background: #dddddd;
+                    color: #afafaf !important;
+                    cursor: no-drop;
+                }
             }
-            .back{
+
+            .back {
                 text-align: center;
                 cursor: pointer;
                 text-decoration: underline;
