@@ -17,7 +17,6 @@ root.render(
       <BrowserRouter>
         <Layout></Layout>
       </BrowserRouter>
-
       {/* </React.StrictMode> */}
     </PersistGate>
   </Provider>
