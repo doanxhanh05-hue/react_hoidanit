@@ -13,17 +13,17 @@ const HomePage = (props) => {
                     type='video/mp4'
                 />
             </video>
-            <div className='hompage-content'>
+            <div className='homepage-content'>
                 <div className='title-1'>Hanh dep trai nhat the gioi</div>
                 <div className='title-2'>asdddddddddddddddddddddddddddddd
                     asdddddddddddddddddddddddddddddddddddddddddddddddddddd
                     asdddddddddddddddddddddddddddddddddddddddddddddddddddd
                 </div>
                 <div className='title-3'>
-                    {isAuthenticated == true ?
+                    {isAuthenticated === false ?
                         <button onClick={() => navigate('/login')}>Get's started, It's free</button>
                         : <button onClick={() => navigate('/users')}>Doing quiz now</button>}
-                    <button>Get's started, It's free</button></div>
+                </div>
             </div>
         </div>
     )
