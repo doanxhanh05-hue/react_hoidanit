@@ -34,12 +34,9 @@ const DetailQuiz = () => {
                     return { quizId: key, answers, questionDescription, image }
                 })
                 .value();
-            console.log(data);
             setDataQuiz(data);
         }
     }
-
-    console.log("check: >>>> ", dataQuiz);
 
     const handlePrev = () => {
         if (index - 1 < 0) return;
@@ -50,6 +47,44 @@ const DetailQuiz = () => {
     const handleNext = () => {
         if (dataQuiz && dataQuiz.length >= index + 1)
             setIndex(index + 1)
+    }
+    const handleFinish = () => {
+        //         {
+        //     "quizId": 1,
+        //     "answers": [
+        //         { 
+        //             "questionId": 1,
+        //             "userAnswerId": [3]
+        //         },
+        //         { 
+        //             "questionId": 2,
+        //             "userAnswerId": [6]
+        //         }
+        //     ]
+        // }
+        console.log('check data: ', dataQuiz);
+        let payload = { quizId: +quizId, answers: [] };
+        let answers = [];
+
+        if (dataQuiz && dataQuiz.length > 0) {
+            dataQuiz.forEach(question => {
+
+                let questionId = question.questionId;
+                let userAnswerId = [];
+                question.answers.forEach(a => {
+                    if (a.isSelected === true)
+                        userAnswerId.push(a.id)
+                })
+                answers.push({
+                    questionId: +questionId,
+                    userAnswerId: userAnswerId,
+
+                })
+            })
+            payload.answers = answers;
+            console.log(" final payload: ", payload);
+
+        }
     }
     const handleCheckbox = (answerId, questionId) => {
         let dataQuizClone = _.cloneDeep(dataQuiz)
@@ -73,7 +108,7 @@ const DetailQuiz = () => {
         <div className='detail-quiz-container'>
             <div className='left-content'>
                 <div className='title'>
-                    Quiz {quizId}:   {location?.state.quizTitle}
+                    Quiz {quizId}:   {location?.state?.quizTitle}
                 </div>
                 <hr />
                 <div className='center'>
@@ -85,8 +120,8 @@ const DetailQuiz = () => {
                         data={dataQuiz && dataQuiz.length > 0 ? dataQuiz[index] : []} />
                 </div>
                 <div className='footer'>
-                    <button c
-                        lassName='btn btn-primary ml-3'
+                    <button
+                        className='btn btn-primary ml-3'
                         onClick={() => handlePrev()}>
                         prev</button>
                     <button
@@ -95,7 +130,7 @@ const DetailQuiz = () => {
                         next</button>
                     <button
                         className='btn btn-warning'
-                        onClick={() => handleNext()}>
+                        onClick={() => handleFinish()}>
                         Finish</button>
                 </div>
             </div>
