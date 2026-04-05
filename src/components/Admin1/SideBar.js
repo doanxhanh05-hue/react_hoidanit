@@ -10,10 +10,11 @@ import {
 } from 'react-pro-sidebar';
 import { FaTachometerAlt, FaGem, FaList, FaGithub, FaRegLaughWink, FaHeart } from 'react-icons/fa';
 import sidebarBg from '../../assest/bg2.jpg';
-import {DiReact} from 'react-icons/di'
-import {MdDashboard} from 'react-icons/md'
-import { Link } from 'react-router-dom';
+import { DiReact } from 'react-icons/di'
+import { MdDashboard } from 'react-icons/md'
+import { Link, useNavigate } from 'react-router-dom';
 const SideBar = (props) => {
+    const navigate = useNavigate()
     const { image, collapsed, toggled, handleToggleSidebar } = props;
     return (
         <>
@@ -38,7 +39,7 @@ const SideBar = (props) => {
                         }}
                     >
                         <DiReact size={'3em'} color={"00bfff"}></DiReact>
-                        <span>HANH DEP TRAI</span>
+                        <span onClick={() => navigate('/')}> HANH DEP TRAI</span>
                     </div>
                 </SidebarHeader>
                 <SidebarContent>
@@ -59,8 +60,10 @@ const SideBar = (props) => {
                             title="Features"
                         >
                             <MenuItem> Quan ly User
-                            <Link to="/admins/manage-users"></Link></MenuItem>
-                            <MenuItem> Quan Ly bai Quiz </MenuItem>
+                                <Link to="/admins/manage-users"></Link></MenuItem>
+                            <MenuItem> Quan Ly bai Quiz
+                                <Link to="/admins/manage-quizzes" />
+                            </MenuItem>
                             <MenuItem> Quan ly cau hoi</MenuItem>
                         </SubMenu>
                     </Menu>
